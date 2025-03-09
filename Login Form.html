@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The Floral Fantasy-Login Form</title>
+    <link rel="icon" href="Images/Fav-Icon.png" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/Login.css">
+</head>
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="img" style="background-image: url(images/bg-1.jpg);"></div>
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Sign In</h3>
+                                </div>
+                            </div>
+                            <form action="#" class="signin-form" id="signInForm">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                    <p class="error-message" id="username-error"></p>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                    <p class="error-message" id="password-error"></p>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+                                </div>
+                            </form>
+                            <p class="text-center">Not a member? <a data-toggle="tab" href="Sign Up .html">Sign Up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const signInForm = document.getElementById("signInForm");
+
+        signInForm.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get the entered username and password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Regular expression for a strong password (at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character)
+            const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Clear any previous error messages
+            const errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach((errorMsg) => {
+                errorMsg.textContent = "";
+            });
+
+            // Check and display error messages
+            if (!/^[A-Za-z]+$/.test(username)) {
+                document.getElementById("username-error").textContent = "Username must contain only alphabets.";
+            }
+
+            if (!strongPasswordRegex.test(password)) {
+                document.getElementById("password-error").textContent = "Password must be at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.";
+            }
+
+            if (/^[A-Za-z]+$/.test(username) && strongPasswordRegex.test(password)) {
+                alert("Sign-in successful.");
+                // Redirect to the main page (replace 'index.html' with your main page URL)
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

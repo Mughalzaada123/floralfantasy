@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>The Floral Fantasy-Contact Form</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="Images/Fav-Icon.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="css/Contact.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<div class="contact1">
+		<div class="container-contact1">
+			<div class="contact1-pic js-tilt" data-tilt>
+				<img src="images/img-01.png" alt="IMG">
+			</div>
+	
+			<form class="contact1-form validate-form" id="contact-form">
+				<span class="contact1-form-title Pg-Headings">
+					Get in touch
+				</span>
+	
+				<div class="wrap-input1 validate-input" data-validate="Name is required">
+					<input class="input1" type="text" name="name" placeholder="Name">
+					<span class="shadow-input1"></span>
+					<div class="error-message" id="name-error"></div>
+				</div>
+	
+				<div class="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+					<input class="input1" type="text" name="email" placeholder="Email">
+					<span class="shadow-input1"></span>
+					<div class="error-message" id="email-error"></div>
+				</div>
+	
+				<div class="wrap-input1 validate-input" data-validate="Subject is required">
+					<input class="input1" type="text" name="subject" placeholder="Subject">
+					<span class="shadow-input1"></span>
+					<div class="error-message" id="subject-error"></div>
+				</div>
+	
+				<div class="wrap-input1 validate-input" data-validate="Message is required">
+					<textarea class="input1" name="message" placeholder="Message"></textarea>
+					<span class="shadow-input1"></span>
+					<div class="error-message" id="message-error"></div>
+				</div>
+	
+				<div class="container-contact1-form-btn">
+					<button class="contact1-form-btn" id="submit-button">
+						<span>
+							Send Email
+							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        // Reset previous error messages
+        clearErrors();
+
+        // Get form fields
+        const name = form.elements.name.value;
+        const email = form.elements.email.value;
+        const subject = form.elements.subject.value;
+        const message = form.elements.message.value;
+
+        let valid = true;
+
+        if (!name) {
+            displayError("name-error", "Name is required");
+            valid = false;
+        } else if (!containsAlphabets(name)) {
+            displayError("name-error", "Name must contain alphabets");
+            valid = false;
+        }
+
+        if (!email || !isValidEmail(email)) {
+            displayError("email-error", "Valid email is required: ex@abc.xyz");
+            valid = false;
+        }
+
+        if (!subject) {
+            displayError("subject-error", "Subject is required");
+            valid = false;
+        }
+
+        if (!message) {
+            displayError("message-error", "Message is required");
+            valid = false;
+        }
+
+        if (valid) {
+            // Submit the form or perform other actions
+            // form.submit();
+        }
+    });
+
+    function displayError(fieldId, message) {
+        const errorElement = document.getElementById(fieldId);
+        errorElement.textContent = message;
+    }
+
+    function clearErrors() {
+        const errorElements = document.querySelectorAll(".error-message");
+        errorElements.forEach(function (element) {
+            element.textContent = "";
+        });
+    }
+
+    function isValidEmail(email) {
+        // Add email validation logic here (e.g., using a regular expression)
+        // For a simple check, you can use:
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    function containsAlphabets(text) {
+        return /[a-zA-Z]/.test(text);
+    }
+});
+
+</script>	
+</body>
+</html>
